@@ -67,65 +67,86 @@
         </ul>
 
         <div class="nav-actions">
+          <button class="global-theme-btn" id="global-theme-toggle" title="Switch to Studio Light Mode" aria-label="Toggle Light/Dark Theme">☀️</button>
           <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank"
             class="btn btn-secondary btn-sm" id="gh-star-btn">
             <span>⭐ GitHub</span>
             <span id="gh-star-count" class="tag">Repo</span>
           </a>
           <a href="#download" class="btn btn-primary btn-sm">
-            <span>⚡ Get Installer</span>
+            <span>⚡ Download / Install</span>
           </a>
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Mobile Navigation">☰</button>
         </div>
       </div>
     </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <a href="#features" class="mobile-nav-link">Features</a>
+      <a href="#architecture" class="mobile-nav-link">TurboQuant Engine</a>
+      <a href="#calculator" class="mobile-nav-link">VRAM Calculator</a>
+      <a href="#benchmarks" class="mobile-nav-link">Benchmarks</a>
+      <a href="#api" class="mobile-nav-link">API Server</a>
+      <a href="#screenshots" class="mobile-nav-link">Screenshots</a>
+      <a href="#creator" class="mobile-nav-link">Creator</a>
+      <a href="#download" class="mobile-nav-link" style="color: var(--primary);">⚡ Download & Install</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <div class="hero-badge-pill">
-          <span>⚡ Google TurboQuant INT4 KV Cache • Discrete GPU / AVX2 SIMD Core</span>
+          <span>⚡ Cross-Platform: Windows • Linux • macOS (Apple Silicon & Intel) • Google TurboQuant™ Core</span>
         </div>
 
         <h1 class="hero-title">
-          Run Massive Local LLMs with <br>
-          <span class="text-gradient">Extreme Speed & 4x KV Memory Compression</span>
+          Run Massive Local LLMs on <br>
+          <span class="text-gradient">Windows, Linux & macOS with 4x KV Compression</span>
         </h1>
 
         <p class="hero-subtitle">
-          A state-of-the-art standalone desktop application powered by <strong>llama-cpp-python</strong>, <strong>Google
+          A state-of-the-art standalone cross-platform desktop application powered by <strong>llama-cpp-python</strong>, <strong>Google
             TurboQuant</strong>, and <strong>Electron</strong>. Complete with structured reasoning accordions, Hugging
-          Face Model Store, GGUF binary inspection, and a local OpenAI-compatible API server. Zero cloud dependency.
+          Face Model Store, GGUF binary inspection, and a local OpenAI-compatible API server. Accelerated by <strong>NVIDIA CUDA</strong>, <strong>AMD Vulkan</strong>, <strong>Apple Silicon Metal</strong>, and <strong>AVX2 SIMD</strong>.
         </p>
 
         <div class="hero-cta-group">
           <a href="https://github.com/Protik1810/llamacpp-turbo/releases/download/v1.0.0/LlamaCppTurboDesktop-v1.0-Setup.exe"
             class="btn btn-primary btn-lg" id="hero-download-btn">
-            <span>🪟 Download Windows Installer</span>
-            <span class="tag" style="background: rgba(255,255,255,0.2); color:#fff;">v1.0 • 119 MB</span>
+            <span>🪟 Windows Setup (.exe)</span>
+            <span class="tag" style="background: rgba(255,255,255,0.2); color:#fff;">119 MB</span>
+          </a>
+          <a href="#download" class="btn btn-secondary btn-lg">
+            <span>🐧 Linux / 🍎 macOS Terminal</span>
           </a>
           <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank"
             class="btn btn-secondary btn-lg">
-            <span>🐙 View on GitHub</span>
+            <span>🐙 GitHub</span>
           </a>
         </div>
 
-        <!-- Linux / macOS One-Liner Pill -->
-        <div style="max-width: 680px; margin: 16px auto 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glow); border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-          <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
-            <span style="font-size: 14px;">🐧</span>
-            <code style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-cyan); white-space: nowrap; overflow-x: auto;" id="hero-linux-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+        <!-- Interactive Cross-Platform One-Liner Box -->
+        <div style="max-width: 720px; margin: 20px auto 0; background: rgba(0,0,0,0.55); border: 1px solid var(--border-glow); border-radius: 16px; padding: 16px 20px; text-align: left;">
+          <div class="hero-os-tabs">
+            <button class="hero-os-tab active" data-os="linux">🐧 Linux (Terminal)</button>
+            <button class="hero-os-tab" data-os="mac">🍎 macOS (Apple Silicon & Intel)</button>
+            <button class="hero-os-tab" data-os="source">🪟 Linux/Mac/Win (Git Source)</button>
           </div>
-          <button class="api-copy-btn" onclick="copySnippet('hero-linux-cmd', this)" style="flex-shrink: 0;">📋 Copy</button>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #090d16; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px;">
+            <code style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-cyan); white-space: nowrap; overflow-x: auto;" id="hero-linux-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+            <button class="api-copy-btn" onclick="copySnippet('hero-linux-cmd', this)" style="flex-shrink: 0;">📋 Copy</button>
+          </div>
         </div>
 
         <div class="hero-specs-bar">
           <span>✓ 100% Offline & Private</span>
           <span>•</span>
-          <span>✓ NVIDIA CUDA / AMD Vulkan / Intel Arc & AVX2</span>
+          <span>✓ NVIDIA CUDA / AMD Vulkan / Apple Metal / AVX2</span>
           <span>•</span>
           <span>✓ OpenAI API Ready (Port 8008)</span>
           <span>•</span>
-          <span>✓ Windows 10/11 & Linux/macOS</span>
+          <span>✓ Windows 10/11 • Linux • macOS</span>
         </div>
 
         <!-- Product Mockup Showcase with Interactive Theme Switcher -->
@@ -623,7 +644,7 @@ for chunk in response:
           </p>
 
           <div class="download-options-grid">
-            <!-- Windows Option -->
+            <!-- 1. Windows Option -->
             <div class="dl-card">
               <div>
                 <div class="dl-card-header">
@@ -631,7 +652,7 @@ for chunk in response:
                   <div class="dl-card-title">Windows Edition</div>
                 </div>
                 <p class="dl-card-desc">
-                  Native Windows 10/11 standalone setup installer with discrete CUDA and Vulkan GPU acceleration.
+                  Native Windows 10/11 standalone installer with NVIDIA CUDA and AMD/Intel Vulkan discrete GPU offloading.
                 </p>
               </div>
               <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
@@ -646,15 +667,15 @@ for chunk in response:
               </div>
             </div>
 
-            <!-- Linux & macOS Terminal Option -->
+            <!-- 2. Linux Option -->
             <div class="dl-card">
               <div>
                 <div class="dl-card-header">
                   <span class="dl-card-icon">🐧</span>
-                  <div class="dl-card-title">Linux & macOS Terminal</div>
+                  <div class="dl-card-title">Linux Terminal</div>
                 </div>
                 <p class="dl-card-desc">
-                  One-line automated terminal script to clone, configure Python virtualenv, install dependencies, and setup the <code>llamacpp-turbo</code> launcher.
+                  Automated terminal installer for Ubuntu, Debian, Fedora, and Arch. Sets up virtualenv, dependencies, and the <code>llamacpp-turbo</code> launcher.
                 </p>
               </div>
               <div class="dl-terminal-box">
@@ -662,10 +683,27 @@ for chunk in response:
                 <button class="api-copy-btn" onclick="copySnippet('linux-install-cmd', this)">📋 Copy</button>
               </div>
             </div>
+
+            <!-- 3. macOS Option -->
+            <div class="dl-card">
+              <div>
+                <div class="dl-card-header">
+                  <span class="dl-card-icon">🍎</span>
+                  <div class="dl-card-title">macOS Terminal</div>
+                </div>
+                <p class="dl-card-desc">
+                  Native Apple Silicon (M1/M2/M3/M4) Metal acceleration and Intel support. One-line terminal setup with global <code>llamacpp-turbo</code> command.
+                </p>
+              </div>
+              <div class="dl-terminal-box">
+                <code class="dl-terminal-code" id="mac-install-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+                <button class="api-copy-btn" onclick="copySnippet('mac-install-cmd', this)">📋 Copy</button>
+              </div>
+            </div>
           </div>
 
           <div style="margin-top: 32px; font-size: 13px; color: var(--text-faint);">
-            Manual Source: <code>git clone https://github.com/Protik1810/llamacpp-turbo.git && ./run.sh</code>
+            Manual Git Source: <code>git clone https://github.com/Protik1810/llamacpp-turbo.git && ./run.sh</code>
           </div>
         </div>
       </div>

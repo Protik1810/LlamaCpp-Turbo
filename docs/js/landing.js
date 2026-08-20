@@ -1,7 +1,62 @@
 // Llama.cpp Turbo Desktop — Landing Page Logic & Interactive Diagnostics
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Smooth scroll for nav links
+  // -------------------------------------------------------------
+  // Global Website Theme Toggle (Obsidian Dark / Studio Light)
+  // -------------------------------------------------------------
+  const globalThemeBtn = document.getElementById('global-theme-toggle');
+  const savedTheme = localStorage.getItem('llamacpp-theme') || 'dark';
+
+  function applyGlobalTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      if (globalThemeBtn) {
+        globalThemeBtn.innerHTML = '🌙';
+        globalThemeBtn.setAttribute('title', 'Switch to Obsidian Dark Mode');
+      }
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      if (globalThemeBtn) {
+        globalThemeBtn.innerHTML = '☀️';
+        globalThemeBtn.setAttribute('title', 'Switch to Studio Light Mode');
+      }
+    }
+    localStorage.setItem('llamacpp-theme', theme);
+  }
+
+  applyGlobalTheme(savedTheme);
+
+  if (globalThemeBtn) {
+    globalThemeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyGlobalTheme(newTheme);
+    });
+  }
+
+  // -------------------------------------------------------------
+  // Mobile Navigation Drawer Toggle
+  // -------------------------------------------------------------
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+
+  if (mobileMenuToggle && mobileNavDrawer) {
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileNavDrawer.classList.toggle('open');
+      mobileMenuToggle.innerHTML = mobileNavDrawer.classList.contains('open') ? '✕' : '☰';
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNavDrawer.classList.remove('open');
+        mobileMenuToggle.innerHTML = '☰';
+      });
+    });
+  }
+
+  // -------------------------------------------------------------
+  // Smooth Scroll for Nav Links
+  // -------------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -14,7 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Fetch GitHub Stars dynamically if online
+  // -------------------------------------------------------------
+  // Fetch GitHub Stars Dynamically
+  // -------------------------------------------------------------
   const repoName = 'Protik1810/llamacpp-turbo';
   const starBadge = document.getElementById('gh-star-count');
 
@@ -31,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Interactive Theme Preview Switcher (Dark / Light)
+  // -------------------------------------------------------------
+  // Interactive Theme Preview Switcher for Screenshots
+  // -------------------------------------------------------------
   const themeBtns = document.querySelectorAll('.theme-toggle-btn');
   const heroMockupImg = document.getElementById('hero-mockup-img');
   const galleryMainImg = document.getElementById('gallery-main-img');
@@ -231,6 +290,32 @@ generateChat();`,
 
       if (apiCodePre) {
         apiCodePre.textContent = API_SNIPPETS[lang];
+      }
+    });
+  });
+
+  // -------------------------------------------------------------
+  // Interactive Hero OS Terminal Switcher (Linux / macOS / Source)
+  // -------------------------------------------------------------
+  const heroOsBtns = document.querySelectorAll('.hero-os-tab');
+  const heroTerminalCode = document.getElementById('hero-linux-cmd');
+
+  const OS_INSTALL_COMMANDS = {
+    linux: 'curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash',
+    mac: 'curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash',
+    source: 'git clone https://github.com/Protik1810/llamacpp-turbo.git && cd llamacpp-turbo && ./run.sh'
+  };
+
+  heroOsBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const osKey = btn.getAttribute('data-os');
+      if (!osKey || !OS_INSTALL_COMMANDS[osKey]) return;
+
+      heroOsBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (heroTerminalCode) {
+        heroTerminalCode.textContent = OS_INSTALL_COMMANDS[osKey];
       }
     });
   });
