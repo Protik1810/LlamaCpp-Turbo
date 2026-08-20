@@ -145,7 +145,7 @@ flowchart TD
 ### Option 1: Windows Setup Installer (Recommended for Windows)
 Download the standalone installer from [GitHub Releases](https://github.com/Protik1810/llamacpp-turbo/releases):
 - **Installer**: `LlamaCppTurboDesktop-v1.0-Setup.exe` (119 MB)
-- **Portable Edition**: `LlamaCppTurboDesktop-v1.0-Portable.exe` (No installation needed)
+  
 
 ### Option 2: Linux & macOS One-Line Terminal Install (Recommended for Linux/macOS)
 Run this single command in your terminal to automatically clone, configure virtual environments, install dependencies, and create the `llamacpp-turbo` system launcher:
@@ -219,7 +219,6 @@ Contributions are welcome! Please check out [CONTRIBUTING.md](CONTRIBUTING.md) f
 ## 👑 Project Leadership & Maintainers
 
 - **Lead Architect & Creator**: [Protik Das (@Protik1810)](https://github.com/Protik1810)
-- **Organization**: [Agentic Systems](https://github.com/Protik1810/llamacpp-turbo)
 
 ---
 
