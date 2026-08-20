@@ -127,13 +127,13 @@
         </div>
 
         <!-- Interactive Cross-Platform One-Liner Box -->
-        <div style="max-width: 720px; margin: 20px auto 0; background: rgba(0,0,0,0.55); border: 1px solid var(--border-glow); border-radius: 16px; padding: 16px 20px; text-align: left;">
+        <div class="hero-terminal-container">
           <div class="hero-os-tabs">
             <button class="hero-os-tab active" data-os="linux">🐧 Linux (Terminal)</button>
-            <button class="hero-os-tab" data-os="mac">🍎 macOS (Apple Silicon & Intel)</button>
-            <button class="hero-os-tab" data-os="source">🪟 Linux/Mac/Win (Git Source)</button>
+            <button class="hero-os-tab" data-os="mac">🍎 macOS (Terminal)</button>
+            <button class="hero-os-tab" data-os="source">🪟 Git Source</button>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #090d16; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px;">
+          <div class="hero-terminal-code-wrap">
             <code style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-cyan); white-space: nowrap; overflow-x: auto;" id="hero-linux-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
             <button class="api-copy-btn" onclick="copySnippet('hero-linux-cmd', this)" style="flex-shrink: 0;">📋 Copy</button>
           </div>
