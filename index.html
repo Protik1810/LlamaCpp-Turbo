@@ -8,7 +8,7 @@
   <!-- SEO & Social Meta Tags -->
   <title>Llama.cpp Turbo Desktop — Google TurboQuant Accelerated Local LLMs</title>
   <meta name="description"
-    content="State-of-the-Art standalone Windows desktop application for running GGUF LLMs locally with Google TurboQuant INT4 KV cache acceleration, discrete GPU support, and OpenAI API server.">
+    content="State-of-the-Art standalone desktop application for running GGUF LLMs locally with Google TurboQuant INT4 KV cache acceleration, discrete GPU support, structured reasoning accordions, and local OpenAI API server.">
   <meta name="keywords"
     content="llamacpp, turboquant, gguf, local-ai, llama3, deepseek, electron, python, windows-installer">
   <meta name="author" content="Protik Das">
@@ -24,7 +24,7 @@
   <link rel="icon" type="image/x-icon" href="assets/icon.ico">
   <link rel="icon" type="image/png" href="assets/logo_32.png">
 
-  <!-- Google Fonts: Outfit & Inter -->
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -59,7 +59,9 @@
         <ul class="nav-menu">
           <li><a href="#features" class="nav-link">Features</a></li>
           <li><a href="#architecture" class="nav-link">TurboQuant Engine</a></li>
+          <li><a href="#calculator" class="nav-link">VRAM Calculator</a></li>
           <li><a href="#benchmarks" class="nav-link">Benchmarks</a></li>
+          <li><a href="#api" class="nav-link">API Server</a></li>
           <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
           <li><a href="#creator" class="nav-link">Creator</a></li>
         </ul>
@@ -71,7 +73,7 @@
             <span id="gh-star-count" class="tag">Repo</span>
           </a>
           <a href="#download" class="btn btn-primary btn-sm">
-            <span>⚡ Download for Windows</span>
+            <span>⚡ Get Installer</span>
           </a>
         </div>
       </div>
@@ -90,7 +92,7 @@
         </h1>
 
         <p class="hero-subtitle">
-          A state-of-the-art standalone Windows application powered by <strong>llama-cpp-python</strong>, <strong>Google
+          A state-of-the-art standalone desktop application powered by <strong>llama-cpp-python</strong>, <strong>Google
             TurboQuant</strong>, and <strong>Electron</strong>. Complete with structured reasoning accordions, Hugging
           Face Model Store, GGUF binary inspection, and a local OpenAI-compatible API server. Zero cloud dependency.
         </p>
@@ -98,13 +100,22 @@
         <div class="hero-cta-group">
           <a href="https://github.com/Protik1810/llamacpp-turbo/releases/download/v1.0.0/LlamaCppTurboDesktop-v1.0-Setup.exe"
             class="btn btn-primary btn-lg" id="hero-download-btn">
-            <span>🪟 Download for Windows</span>
+            <span>🪟 Download Windows Installer</span>
             <span class="tag" style="background: rgba(255,255,255,0.2); color:#fff;">v1.0 • 119 MB</span>
           </a>
           <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank"
             class="btn btn-secondary btn-lg">
             <span>🐙 View on GitHub</span>
           </a>
+        </div>
+
+        <!-- Linux / macOS One-Liner Pill -->
+        <div style="max-width: 680px; margin: 16px auto 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glow); border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
+            <span style="font-size: 14px;">🐧</span>
+            <code style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-cyan); white-space: nowrap; overflow-x: auto;" id="hero-linux-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+          </div>
+          <button class="api-copy-btn" onclick="copySnippet('hero-linux-cmd', this)" style="flex-shrink: 0;">📋 Copy</button>
         </div>
 
         <div class="hero-specs-bar">
@@ -114,7 +125,7 @@
           <span>•</span>
           <span>✓ OpenAI API Ready (Port 8008)</span>
           <span>•</span>
-          <span>✓ Windows 10/11 64-Bit</span>
+          <span>✓ Windows 10/11 & Linux/macOS</span>
         </div>
 
         <!-- Product Mockup Showcase with Interactive Theme Switcher -->
@@ -250,8 +261,161 @@
       </div>
     </section>
 
+    <!-- TurboQuant Architecture Section -->
+    <section class="section" id="architecture">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">MATHEMATICAL ARCHITECTURE</div>
+          <h2 class="section-title">How Google TurboQuant™ Slashes KV Memory</h2>
+          <p class="section-desc">By rotating activation vectors via Fast Walsh-Hadamard Transform (FWHT), TurboQuant eliminates cross-channel outliers before low-bit quantization.</p>
+        </div>
+
+        <div class="architecture-grid">
+          <!-- Step 1 -->
+          <div class="arch-card">
+            <div class="arch-step-badge">STEP 1 • OUTLIER SPREADING</div>
+            <h3>Fast Walsh-Hadamard Transform</h3>
+            <p>
+              Applies an orthogonal rotation matrix $H_d$ along the head dimension $d$. This diffuses concentrated activation energy uniformly across all dimensions.
+            </p>
+            <div class="arch-math-box">
+              H_d = (1/√2) [H_(d/2)  H_(d/2); H_(d/2) -H_(d/2)]
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="arch-card">
+            <div class="arch-step-badge">STEP 2 • LOW-BIT QUANTIZATION</div>
+            <h3>Asymmetric INT4/INT2 Packing</h3>
+            <p>
+              Quantizes the uniformly distributed components into 4-bit or 2-bit integer indices with per-block scale and zero-point vectors, reducing VRAM by 75% to 87.5%.
+            </p>
+            <div class="arch-math-box">
+              q = clip(round((H_d · x) / scale + zp), 0, 2^b - 1)
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="arch-card">
+            <div class="arch-step-badge">STEP 3 • TURBO ATTENTION SPARSITY</div>
+            <h3>Streaming Token Sparsity Budget</h3>
+            <p>
+              Identifies transient middle-context tokens with low cumulative attention weights, offloading them to unlock up to 5.0x effective compression.
+            </p>
+            <div class="arch-math-box">
+              Effective Ratio = (16 / bits) × (1 / (1 - Sparsity))
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; text-align: center;">
+          <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank" class="btn btn-secondary btn-md">
+            <span>📖 Read Complete TurboQuant Technical Whitepaper & Math Derivations →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Real-Time VRAM Calculator -->
+    <section class="section" id="calculator" style="background: rgba(15, 23, 42, 0.45);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">INTERACTIVE DIAGNOSTICS</div>
+          <h2 class="section-title">TurboQuant VRAM & Speedup Calculator</h2>
+          <p class="section-desc">Select your target model and context window to calculate instant KV cache memory savings and memory bandwidth speedups.</p>
+        </div>
+
+        <div class="calc-box">
+          <div class="calc-layout">
+            <!-- Controls -->
+            <div class="calc-controls">
+              <div class="calc-control-group">
+                <label class="calc-label" for="calc-model">
+                  <span>Target Model Architecture</span>
+                </label>
+                <select id="calc-model" class="calc-select">
+                  <option value="llama-3.3-70b">Llama-3.3-70B-Instruct (80 layers, 8 KV heads)</option>
+                  <option value="deepseek-r1-32b">DeepSeek-R1-Distill-32B (64 layers, 8 KV heads)</option>
+                  <option value="qwen-2.5-14b">Qwen-2.5-Coder-14B (48 layers, 8 KV heads)</option>
+                  <option value="gemma-2-9b">Gemma-2-9B-IT (42 layers, 8 KV heads, dim 256)</option>
+                  <option value="llama-3.1-8b">Meta-Llama-3.1-8B (32 layers, 8 KV heads)</option>
+                </select>
+              </div>
+
+              <div class="calc-control-group">
+                <label class="calc-label" for="calc-context">
+                  <span>Context Window Length</span>
+                </label>
+                <select id="calc-context" class="calc-select">
+                  <option value="4096">4,096 tokens (Standard)</option>
+                  <option value="8192">8,192 tokens (Extended)</option>
+                  <option value="16384" selected>16,384 tokens (Deep Reasoning)</option>
+                  <option value="32768">32,768 tokens (Ultra-Long Document)</option>
+                  <option value="65536">65,536 tokens (Massive Context)</option>
+                </select>
+              </div>
+
+              <div class="calc-control-group">
+                <label class="calc-label" for="calc-bits">
+                  <span>Quantization Bit Precision</span>
+                </label>
+                <select id="calc-bits" class="calc-select">
+                  <option value="8">INT8 KV Cache (2.0x Compression)</option>
+                  <option value="4" selected>TurboQuant INT4 KV Cache (4.0x Default)</option>
+                  <option value="2">TurboQuant INT2 KV Cache (8.0x Ultra-Dense)</option>
+                </select>
+              </div>
+
+              <div class="calc-control-group">
+                <label class="calc-label" for="calc-sparsity">
+                  <span>Turbo Attention Sparsity Budget</span>
+                  <span id="calc-sparsity-val" style="color: var(--primary); font-weight:700;">20%</span>
+                </label>
+                <input type="range" id="calc-sparsity" class="calc-range" min="0" max="40" step="5" value="20">
+              </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="calc-results-panel">
+              <div class="calc-metrics-grid">
+                <div class="calc-stat-card">
+                  <div class="calc-stat-label">Standard FP16 KV VRAM</div>
+                  <div class="calc-stat-value" id="stat-raw-vram">10.24 GB</div>
+                </div>
+
+                <div class="calc-stat-card">
+                  <div class="calc-stat-label">TurboQuant Compressed VRAM</div>
+                  <div class="calc-stat-value highlight" id="stat-turbo-vram">2.05 GB</div>
+                </div>
+
+                <div class="calc-stat-card">
+                  <div class="calc-stat-label">Effective Compression Ratio</div>
+                  <div class="calc-stat-value highlight" id="stat-ratio">5.0x</div>
+                </div>
+
+                <div class="calc-stat-card">
+                  <div class="calc-stat-label">Estimated Generation Speedup</div>
+                  <div class="calc-stat-value" id="stat-speedup">1.28x</div>
+                </div>
+              </div>
+
+              <div class="calc-meter-wrap">
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px; color:var(--text-muted);">
+                  <span>VRAM Savings Efficiency</span>
+                  <span id="stat-savings-pct" style="color:var(--accent-green); font-weight:700;">80.0% VRAM Saved</span>
+                </div>
+                <div class="calc-meter-track">
+                  <div class="calc-meter-fill" id="stat-meter-fill" style="width: 80%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Technical Specs & Benchmarks -->
-    <section class="section" id="benchmarks" style="background: rgba(15, 23, 42, 0.4);">
+    <section class="section" id="benchmarks">
       <div class="container">
         <div class="section-header">
           <div class="section-tag">PERFORMANCE BENCHMARKS</div>
@@ -304,8 +468,67 @@
                 <td class="highlight-val">0.52 GB VRAM</td>
                 <td class="highlight-val">75.2% (4x)</td>
               </tr>
+              <tr>
+                <td><strong>Meta-Llama-3.1-8B</strong></td>
+                <td>32,768 tokens</td>
+                <td>4.10 GB VRAM</td>
+                <td>2.05 GB VRAM</td>
+                <td class="highlight-val">1.02 GB VRAM</td>
+                <td class="highlight-val">75.0% (4x)</td>
+              </tr>
             </tbody>
           </table>
+          <div style="margin-top: 20px; text-align: center;">
+            <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank" class="btn btn-secondary btn-sm">
+              <span>📖 Read Full TurboQuant Benchmark Whitepaper & Perplexity Analysis →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local OpenAI API Integration Section -->
+    <section class="section" id="api" style="background: rgba(15, 23, 42, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">DEVELOPER INTEGRATION</div>
+          <h2 class="section-title">Built-In OpenAI-Compatible API Server</h2>
+          <p class="section-desc">Connect Cursor, Continue, LangChain, or custom Python & cURL scripts directly to your local desktop engine on port 8008.</p>
+        </div>
+
+        <div class="api-tabs-card">
+          <div class="api-tabs-header">
+            <div class="api-tabs-list">
+              <button class="api-tab-btn active" data-lang="python">Python (openai)</button>
+              <button class="api-tab-btn" data-lang="curl">cURL</button>
+              <button class="api-tab-btn" data-lang="js">JavaScript / Node</button>
+              <button class="api-tab-btn" data-lang="cursor">Cursor / Continue</button>
+            </div>
+            <button class="api-copy-btn" onclick="copySnippet('api-code-snippet', this)">📋 Copy Code</button>
+          </div>
+          <div class="api-code-content">
+            <pre class="api-code-pre"><code id="api-code-snippet">import openai
+
+client = openai.OpenAI(
+    base_url="http://localhost:8008/v1",
+    api_key="not-needed"  # Local offline engine
+)
+
+# Live streaming with thinking tag extraction
+response = client.chat.completions.create(
+    model="local-model",
+    messages=[
+        {"role": "system", "content": "You are an expert AI assistant."},
+        {"role": "user", "content": "Write a fast Python quicksort with detailed reasoning."}
+    ],
+    temperature=0.7,
+    stream=True
+)
+
+for chunk in response:
+    content = chunk.choices[0].delta.content or ""
+    print(content, end="", flush=True)</code></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -375,9 +598,12 @@
               Architect of the standalone Llama.cpp Turbo platform, integrating Google TurboQuant randomized Fast
               Walsh-Hadamard KV compression, discrete GPU scheduling, and cross-platform desktop UI.
             </p>
-            <div style="margin-top: 12px;">
+            <div style="margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap;">
               <a href="https://github.com/Protik1810" target="_blank" class="btn btn-secondary btn-sm">
                 <span>🐙 @Protik1810 on GitHub</span>
+              </a>
+              <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-secondary btn-sm">
+                <span>🤝 Contributor Guide</span>
               </a>
             </div>
           </div>
@@ -393,24 +619,53 @@
             style="width: 72px; height: 72px; margin-bottom: 20px; border-radius: 16px; box-shadow: 0 0 24px rgba(56,189,248,0.6);">
           <h2 class="cta-title">Ready to Experience Turbocharged Local AI?</h2>
           <p class="cta-desc">
-            Download the official Windows Setup installer to get started in seconds. Instant setup with zero cloud
-            dependency.
+            Download the official Windows Setup installer or install instantly via Linux/macOS terminal with zero cloud dependency.
           </p>
 
-          <div class="hero-cta-group">
-            <a href="https://github.com/Protik1810/llamacpp-turbo/releases/download/v1.0.0/LlamaCppTurboDesktop-v1.0-Setup.exe"
-              class="btn btn-primary btn-lg">
-              <span>🪟 Download for Windows</span>
-              <span class="tag" style="background: rgba(255,255,255,0.2); color:#fff;">v1.0 • 119 MB</span>
-            </a>
-            <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank"
-              class="btn btn-secondary btn-lg">
-              <span>🐙 View Repository</span>
-            </a>
+          <div class="download-options-grid">
+            <!-- Windows Option -->
+            <div class="dl-card">
+              <div>
+                <div class="dl-card-header">
+                  <span class="dl-card-icon">🪟</span>
+                  <div class="dl-card-title">Windows Edition</div>
+                </div>
+                <p class="dl-card-desc">
+                  Native Windows 10/11 standalone setup installer with discrete CUDA and Vulkan GPU acceleration.
+                </p>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+                <a href="https://github.com/Protik1810/llamacpp-turbo/releases/download/v1.0.0/LlamaCppTurboDesktop-v1.0-Setup.exe"
+                  class="btn btn-primary btn-md">
+                  <span>⚡ Download Setup (119 MB)</span>
+                </a>
+                <a href="https://github.com/Protik1810/llamacpp-turbo/releases/download/v1.0.0/LlamaCppTurboDesktop-v1.0-Portable.exe"
+                  class="btn btn-secondary btn-sm">
+                  <span>📦 Portable Single EXE</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Linux & macOS Terminal Option -->
+            <div class="dl-card">
+              <div>
+                <div class="dl-card-header">
+                  <span class="dl-card-icon">🐧</span>
+                  <div class="dl-card-title">Linux & macOS Terminal</div>
+                </div>
+                <p class="dl-card-desc">
+                  One-line automated terminal script to clone, configure Python virtualenv, install dependencies, and setup the <code>llamacpp-turbo</code> launcher.
+                </p>
+              </div>
+              <div class="dl-terminal-box">
+                <code class="dl-terminal-code" id="linux-install-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+                <button class="api-copy-btn" onclick="copySnippet('linux-install-cmd', this)">📋 Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div style="margin-top: 28px; font-size: 13px; color: var(--text-faint);">
-            Direct installer build location in repo: <code>dist_app/LlamaCppTurboDesktop-v1.0-Setup.exe</code>
+          <div style="margin-top: 32px; font-size: 13px; color: var(--text-faint);">
+            Manual Source: <code>git clone https://github.com/Protik1810/llamacpp-turbo.git && ./run.sh</code>
           </div>
         </div>
       </div>
@@ -426,9 +681,12 @@
         </div>
         <div class="footer-links">
           <a href="#features">Features</a>
+          <a href="#architecture">TurboQuant Engine</a>
+          <a href="#calculator">VRAM Calculator</a>
           <a href="#benchmarks">Benchmarks</a>
-          <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank">GitHub Repository</a>
-          <a href="https://github.com/Protik1810/llamacpp-turbo/releases" target="_blank">Release Notes</a>
+          <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank">Whitepaper</a>
+          <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank">GitHub</a>
+          <a href="https://github.com/Protik1810/llamacpp-turbo/releases" target="_blank">Releases</a>
         </div>
       </div>
     </footer>
