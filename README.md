@@ -1,7 +1,7 @@
 # ⚡ Llama.cpp Turbo Desktop (Electron + Google TurboQuant™)
 
 A high-performance, modern desktop GUI application built in **Python with Flask and Javascript with Electron** to run `llama.cpp` GGUF models locally with full hardware acceleration, Google **TurboQuant™** optimization, system-wide model discovery, interactive playgrounds, GGUF metadata inspector, Hugging Face model downloader, and built-in OpenAI-compatible API server.
-https://protik1810.github.io/LlamaCpp-Turbo/
+https://protik1810.github.io/LlamaCpp-Turbo/ 
 ---
 
 ## 🌟 Key Features
