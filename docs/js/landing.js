@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Fetch GitHub Stars & Release info dynamically if online
-  const repoName = 'Protik1810/llamacpp-turbo-desktop';
+  const repoName = 'Protik1810/llamacpp-turbo';
   const starBadge = document.getElementById('gh-star-count');
 
   if (starBadge) {
