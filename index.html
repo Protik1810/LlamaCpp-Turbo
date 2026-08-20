@@ -66,9 +66,10 @@
         </ul>
 
         <div class="nav-actions">
-          <button class="global-theme-btn" id="global-theme-toggle" title="Switch Theme" aria-label="Toggle Light/Dark Theme">☀️</button>
-          <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank"
-            class="btn btn-secondary btn-sm" id="gh-star-btn">
+          <button class="global-theme-btn" id="global-theme-toggle" title="Switch Theme"
+            aria-label="Toggle Light/Dark Theme">☀️</button>
+          <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank" class="btn btn-secondary btn-sm"
+            id="gh-star-btn">
             <span>⭐ GitHub</span>
           </a>
           <a href="#download" class="btn btn-primary btn-sm">
@@ -104,9 +105,12 @@
         </h1>
 
         <p class="hero-subtitle">
-          A state-of-the-art standalone cross-platform desktop application powered by <strong>llama-cpp-python</strong>, <strong>Google
+          A state-of-the-art standalone cross-platform desktop application powered by <strong>llama-cpp-python</strong>,
+          <strong>Google
             TurboQuant</strong>, and <strong>Electron</strong>. Complete with structured reasoning accordions, Hugging
-          Face Model Store, GGUF binary inspection, and a local OpenAI-compatible API server. Accelerated by <strong>NVIDIA CUDA</strong>, <strong>AMD Vulkan</strong>, <strong>Apple Silicon Metal</strong>, and <strong>AVX2 SIMD</strong>.
+          Face Model Store, GGUF binary inspection, and a local OpenAI-compatible API server. Accelerated by
+          <strong>NVIDIA CUDA</strong>, <strong>AMD Vulkan</strong>, <strong>Apple Silicon Metal</strong>, and
+          <strong>AVX2 SIMD</strong>.
         </p>
 
         <div class="hero-cta-group">
@@ -118,8 +122,7 @@
           <a href="#download" class="btn btn-secondary btn-lg">
             <span>🐧 Linux / 🍎 macOS Terminal</span>
           </a>
-          <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank"
-            class="btn btn-secondary btn-lg">
+          <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank" class="btn btn-secondary btn-lg">
             <span>🐙 GitHub</span>
           </a>
         </div>
@@ -132,8 +135,11 @@
             <button class="hero-os-tab" data-os="source">🪟 Git Source</button>
           </div>
           <div class="hero-terminal-code-wrap">
-            <code style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-cyan); white-space: nowrap; overflow-x: auto;" id="hero-linux-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
-            <button class="api-copy-btn" onclick="copySnippet('hero-linux-cmd', this)" style="flex-shrink: 0;">📋 Copy</button>
+            <code
+              style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-cyan); white-space: nowrap; overflow-x: auto;"
+              id="hero-linux-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+            <button class="api-copy-btn" onclick="copySnippet('hero-linux-cmd', this)" style="flex-shrink: 0;">📋
+              Copy</button>
           </div>
         </div>
 
@@ -286,7 +292,8 @@
         <div class="section-header">
           <div class="section-tag">MATHEMATICAL ARCHITECTURE</div>
           <h2 class="section-title">How Google TurboQuant™ Slashes KV Memory</h2>
-          <p class="section-desc">By rotating activation vectors via Fast Walsh-Hadamard Transform (FWHT), TurboQuant eliminates cross-channel outliers before low-bit quantization.</p>
+          <p class="section-desc">By rotating activation vectors via Fast Walsh-Hadamard Transform (FWHT), TurboQuant
+            eliminates cross-channel outliers before low-bit quantization.</p>
         </div>
 
         <div class="architecture-grid">
@@ -295,10 +302,11 @@
             <div class="arch-step-badge">STEP 1 • OUTLIER SPREADING</div>
             <h3>Fast Walsh-Hadamard Transform</h3>
             <p>
-              Applies an orthogonal rotation matrix $H_d$ along the head dimension $d$. This diffuses concentrated activation energy uniformly across all dimensions.
+              Applies an orthogonal rotation matrix $H_d$ along the head dimension $d$. This diffuses concentrated
+              activation energy uniformly across all dimensions.
             </p>
             <div class="arch-math-box">
-              H_d = (1/√2) [H_(d/2)  H_(d/2); H_(d/2) -H_(d/2)]
+              H_d = (1/√2) [H_(d/2) H_(d/2); H_(d/2) -H_(d/2)]
             </div>
           </div>
 
@@ -307,7 +315,8 @@
             <div class="arch-step-badge">STEP 2 • LOW-BIT QUANTIZATION</div>
             <h3>Asymmetric INT4/INT2 Packing</h3>
             <p>
-              Quantizes the uniformly distributed components into 4-bit or 2-bit integer indices with per-block scale and zero-point vectors, reducing VRAM by 75% to 87.5%.
+              Quantizes the uniformly distributed components into 4-bit or 2-bit integer indices with per-block scale
+              and zero-point vectors, reducing VRAM by 75% to 87.5%.
             </p>
             <div class="arch-math-box">
               q = clip(round((H_d · x) / scale + zp), 0, 2^b - 1)
@@ -319,7 +328,8 @@
             <div class="arch-step-badge">STEP 3 • TURBO ATTENTION SPARSITY</div>
             <h3>Streaming Token Sparsity Budget</h3>
             <p>
-              Identifies transient middle-context tokens with low cumulative attention weights, offloading them to unlock up to 5.0x effective compression.
+              Identifies transient middle-context tokens with low cumulative attention weights, offloading them to
+              unlock up to 5.0x effective compression.
             </p>
             <div class="arch-math-box">
               Effective Ratio = (16 / bits) × (1 / (1 - Sparsity))
@@ -328,7 +338,8 @@
         </div>
 
         <div style="margin-top: 28px; text-align: center;">
-          <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank" class="btn btn-secondary btn-md">
+          <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank"
+            class="btn btn-secondary btn-md">
             <span>📖 Read Complete TurboQuant Technical Whitepaper & Math Derivations →</span>
           </a>
         </div>
@@ -341,7 +352,8 @@
         <div class="section-header">
           <div class="section-tag">INTERACTIVE DIAGNOSTICS</div>
           <h2 class="section-title">TurboQuant VRAM & Speedup Calculator</h2>
-          <p class="section-desc">Select your target model and context window to calculate instant KV cache memory savings and memory bandwidth speedups.</p>
+          <p class="section-desc">Select your target model and context window to calculate instant KV cache memory
+            savings and memory bandwidth speedups.</p>
         </div>
 
         <div class="calc-box">
@@ -419,9 +431,11 @@
               </div>
 
               <div class="calc-meter-wrap">
-                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px; color:var(--text-muted);">
+                <div
+                  style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px; color:var(--text-muted);">
                   <span>VRAM Savings Efficiency</span>
-                  <span id="stat-savings-pct" style="color:var(--accent-green); font-weight:700;">80.0% VRAM Saved</span>
+                  <span id="stat-savings-pct" style="color:var(--accent-green); font-weight:700;">80.0% VRAM
+                    Saved</span>
                 </div>
                 <div class="calc-meter-track">
                   <div class="calc-meter-fill" id="stat-meter-fill" style="width: 80%;"></div>
@@ -498,7 +512,8 @@
             </tbody>
           </table>
           <div style="margin-top: 20px; text-align: center;">
-            <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank" class="btn btn-secondary btn-sm">
+            <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md"
+              target="_blank" class="btn btn-secondary btn-sm">
               <span>📖 Read Full TurboQuant Benchmark Whitepaper & Perplexity Analysis →</span>
             </a>
           </div>
@@ -512,7 +527,8 @@
         <div class="section-header">
           <div class="section-tag">DEVELOPER INTEGRATION</div>
           <h2 class="section-title">Built-In OpenAI-Compatible API Server</h2>
-          <p class="section-desc">Connect Cursor, Continue, LangChain, or custom Python & cURL scripts directly to your local desktop engine on port 8008.</p>
+          <p class="section-desc">Connect Cursor, Continue, LangChain, or custom Python & cURL scripts directly to your
+            local desktop engine on port 8008.</p>
         </div>
 
         <div class="api-tabs-card">
@@ -607,7 +623,8 @@ for chunk in response:
 
         <div class="contributor-box">
           <div class="contributor-avatar-wrap">
-            <img src="https://github.com/Protik1810.png" onerror="this.src='assets/protik-avatar.png'" alt="Protik Das (@Protik1810)" class="contributor-avatar">
+            <img src="https://github.com/Protik1810.png" onerror="this.src='assets/protik-avatar.png'"
+              alt="Protik Das (@Protik1810)" class="contributor-avatar">
             <span class="contributor-badge-crown">👑</span>
           </div>
           <div class="contributor-details">
@@ -621,7 +638,8 @@ for chunk in response:
               <a href="https://github.com/Protik1810" target="_blank" class="btn btn-secondary btn-sm">
                 <span>🐙 @Protik1810 on GitHub</span>
               </a>
-              <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-secondary btn-sm">
+              <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/CONTRIBUTING.md" target="_blank"
+                class="btn btn-secondary btn-sm">
                 <span>🤝 Contributor Guide</span>
               </a>
             </div>
@@ -638,7 +656,8 @@ for chunk in response:
             style="width: 72px; height: 72px; margin-bottom: 20px; border-radius: 16px; box-shadow: 0 0 24px rgba(56,189,248,0.6);">
           <h2 class="cta-title">Ready to Experience Turbocharged Local AI?</h2>
           <p class="cta-desc">
-            Download the official Windows Setup installer or install instantly via Linux/macOS terminal with zero cloud dependency.
+            Download the official Windows Setup installer or install instantly via Linux/macOS terminal with zero cloud
+            dependency.
           </p>
 
           <div class="download-options-grid">
@@ -650,7 +669,8 @@ for chunk in response:
                   <div class="dl-card-title">Windows Edition</div>
                 </div>
                 <p class="dl-card-desc">
-                  Native Windows 10/11 standalone installer with NVIDIA CUDA and AMD/Intel Vulkan discrete GPU offloading.
+                  Native Windows 10/11 standalone installer with NVIDIA CUDA and AMD/Intel Vulkan discrete GPU
+                  offloading.
                 </p>
               </div>
               <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
@@ -658,10 +678,7 @@ for chunk in response:
                   class="btn btn-primary btn-md">
                   <span>⚡ Download Setup (119 MB)</span>
                 </a>
-                <a href="https://github.com/Protik1810/llamacpp-turbo/releases/download/v1.0.0/LlamaCppTurboDesktop-v1.0-Portable.exe"
-                  class="btn btn-secondary btn-sm">
-                  <span>📦 Portable Single EXE</span>
-                </a>
+
               </div>
             </div>
 
@@ -673,11 +690,13 @@ for chunk in response:
                   <div class="dl-card-title">Linux Terminal</div>
                 </div>
                 <p class="dl-card-desc">
-                  Automated terminal installer for Ubuntu, Debian, Fedora, and Arch. Sets up virtualenv, dependencies, and the <code>llamacpp-turbo</code> launcher.
+                  Automated terminal installer for Ubuntu, Debian, Fedora, and Arch. Sets up virtualenv, dependencies,
+                  and the <code>llamacpp-turbo</code> launcher.
                 </p>
               </div>
               <div class="dl-terminal-box">
-                <code class="dl-terminal-code" id="linux-install-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+                <code class="dl-terminal-code"
+                  id="linux-install-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
                 <button class="api-copy-btn" onclick="copySnippet('linux-install-cmd', this)">📋 Copy</button>
               </div>
             </div>
@@ -690,11 +709,13 @@ for chunk in response:
                   <div class="dl-card-title">macOS Terminal</div>
                 </div>
                 <p class="dl-card-desc">
-                  Native Apple Silicon (M1/M2/M3/M4) Metal acceleration and Intel support. One-line terminal setup with global <code>llamacpp-turbo</code> command.
+                  Native Apple Silicon (M1/M2/M3/M4) Metal acceleration and Intel support. One-line terminal setup with
+                  global <code>llamacpp-turbo</code> command.
                 </p>
               </div>
               <div class="dl-terminal-box">
-                <code class="dl-terminal-code" id="mac-install-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
+                <code class="dl-terminal-code"
+                  id="mac-install-cmd">curl -fsSL https://raw.githubusercontent.com/Protik1810/llamacpp-turbo/main/install.sh | bash</code>
                 <button class="api-copy-btn" onclick="copySnippet('mac-install-cmd', this)">📋 Copy</button>
               </div>
             </div>
@@ -720,7 +741,8 @@ for chunk in response:
           <a href="#architecture">TurboQuant Engine</a>
           <a href="#calculator">VRAM Calculator</a>
           <a href="#benchmarks">Benchmarks</a>
-          <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md" target="_blank">Whitepaper</a>
+          <a href="https://github.com/Protik1810/llamacpp-turbo/blob/main/docs/TURBOQUANT_BENCHMARKS.md"
+            target="_blank">Whitepaper</a>
           <a href="https://github.com/Protik1810/llamacpp-turbo" target="_blank">GitHub</a>
           <a href="https://github.com/Protik1810/llamacpp-turbo/releases" target="_blank">Releases</a>
         </div>
