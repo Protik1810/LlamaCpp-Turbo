@@ -1,0 +1,67 @@
+{
+  "name": "llamacpp-turbo-desktop",
+  "version": "1.0.0",
+  "description": "State-of-the-Art Llama.cpp Turbo Desktop with Google TurboQuant Acceleration",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build:backend": ".venv\\Scripts\\pyinstaller.exe --noconfirm --distpath dist_backend server.spec",
+    "build:app": "electron-builder --win dir",
+    "build:portable": "electron-builder --win portable",
+    "build": "npm run build:backend && npm run build:app"
+  },
+  "build": {
+    "appId": "com.agentic.llamacpp-turbo-desktop",
+    "productName": "LlamaCppTurboDesktop",
+    "directories": {
+      "output": "dist_app"
+    },
+    "files": [
+      "electron/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist_backend/server",
+        "to": "backend",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "dir",
+        "portable"
+      ],
+      "icon": "assets/icon.ico",
+      "executableName": "LlamaCppTurboDesktop"
+    },
+    "portable": {
+      "artifactName": "LlamaCppTurboDesktop-v1.0-Portable.exe"
+    }
+  },
+  "keywords": [
+    "llamacpp",
+    "electron",
+    "turboquant",
+    "gguf",
+    "local-ai",
+    "desktop-app"
+  ],
+  "author": "Google DeepMind Agentic Systems",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^26.15.3"
+  }
+}

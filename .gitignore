@@ -1,0 +1,33 @@
+# Node Dependencies & Package Bundles
+node_modules/
+dist/
+dist_backend/
+dist_app/
+build/
+
+# Python Virtual Environment & Bytecode
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.spec.bak
+
+# Large GGUF Models & Temporary Downloads
+models/*.gguf
+models/*.part
+models/*.bin
+
+# Application Data & History
+data/test_sessions/
+data/sessions/*.json
+!data/sessions/.gitkeep
+*.log
+
+# OS Metadata & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,27 @@
+# Llama.cpp Turbo Desktop - Backend Dependencies (Pure Python & FastAPI)
+
+# Core Web & API Framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.8.0
+starlette>=0.38.0
+
+# Inference Engine & Model Handling
+llama-cpp-python>=0.2.80
+gguf>=0.10.0
+numpy>=1.26.0
+
+# Downloads & Model Hub
+huggingface-hub>=0.24.0
+requests>=2.32.0
+tqdm>=4.66.0
+
+# Utilities & System Monitoring
+psutil>=6.0.0
+Pillow>=10.4.0
+markdown>=3.6
+pygments>=2.18.0
+
+# Packaging & Linting
+pyinstaller>=6.10.0
+flake8>=7.1.0
